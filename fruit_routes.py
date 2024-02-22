@@ -37,3 +37,11 @@ def apply_fruit_routes(app):
         fruit_id = created_fruit.id
 
         return redirect(f"/fruits/{fruit_id}")
+    
+    @app.route('/fruits/<int:id>/delete', methods=['POST'])
+    def delete_fruit(id):
+        connection = get_flask_database_connection(app)
+        repository = FruitRepository(connection)
+        repository.delete(id)
+
+        return redirect('/fruits')   

@@ -64,3 +64,16 @@ def test_create_fruit_form(db_connection, page, test_web_address):
 
     calory_element = page.locator(".t-calory")
     expect(calory_element).to_have_text("Calories: 25")
+
+def test_delete_fruit(db_connection, page, test_web_address):
+    db_connection.seed("seeds/fruit_store.sql")
+    page.goto(f"http://{test_web_address}/fruits")
+    page.click("text=Mango, 8 calories")
+    page.click("text=Delete Fruit")
+    list_items = page.locator("li")
+    expect(list_items).to_have_text([
+        "Apple, 15 calories",
+        "Pear, 1 calories",
+        "Orange, 3 calories",
+        "Kiwi, 25 calories"
+    ])
