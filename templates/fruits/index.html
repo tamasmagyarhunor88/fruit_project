@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Fruit Store</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>Fruits</h1>
+    <ul>
+      <!-- We'll use Jinja's `for` loop to iterate over all books -->
+      {% for fruit in fruits %}
+        <li>
+          <!-- We can use {{ placeholders }} in HTML attributes too -->
+          <a href="/fruits/{{fruit.id}}">{{fruit.name}}, {{fruit.calory}} calories</a>
+        </li>
+      {% endfor %}
+      <!-- Jinja isn't Python, so we need an endfor to close the loop -->
+    </ul>
+
+    <!-- This is a link to another page. -->
+    <!-- The browser will send `GET /books/new` when the user clicks this -->
+    <a href="/fruits/new">Add a new fruit</a>
+  </body>
+</html>
