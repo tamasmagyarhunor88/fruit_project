@@ -21,8 +21,9 @@ class FruitRepository():
         return fruit
     
     def create(self, fruit):
-        self._connection.execute('INSERT INTO fruits(name, calory) VALUES (%s, %s)', [fruit.name, fruit.calory])
-        return None
+        rows = self._connection.execute('INSERT INTO fruits(name, calory) VALUES (%s, %s) RETURNING id', [fruit.name, fruit.calory])
+        fruit.id = rows[0]['id']
+        return fruit
     
     def delete(self, fruit_id):
         self._connection.execute('DELETE FROM fruits WHERE id = %s', [fruit_id])

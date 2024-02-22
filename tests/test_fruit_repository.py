@@ -30,10 +30,9 @@ def test_create(db_connection): # See conftest.py to learn what `db_connection` 
     repository = FruitRepository(db_connection) # Create a new BookRepository
     
     fruit = Fruit(None, 'Strawberry', 23)
-    repository.create(fruit)
-    fruit.id = 6
-    fruit_created = repository.find(6)
-    assert fruit_created == fruit
+    new_fruit = repository.create(fruit)
+    fruit.id = new_fruit.id
+    assert new_fruit == fruit
 
 def test_delete(db_connection):
     db_connection.seed("seeds/fruit_store.sql") # Seed our database with some test data
