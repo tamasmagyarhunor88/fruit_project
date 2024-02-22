@@ -20,3 +20,20 @@ def apply_fruit_routes(app):
         repository = FruitRepository(connection)
         fruit = repository.find(id)
         return render_template('fruits/show.html', fruit=fruit)
+    
+    @app.route('/fruits/new', methods=['GET'])
+    def new_fruit_form():
+        return render_template('fruits/new.html')
+    
+    @app.route('/fruits', methods=['POST'])
+    def create_fruit():
+        name = request.form['name']
+        calory = request.form['calory']
+        fruit = Fruit(None, name, calory)
+
+        connection = get_flask_database_connection(app)
+        repository = FruitRepository(connection)
+        created_fruit = repository.create(fruit)
+        fruit_id = created_fruit.id
+
+        return redirect(f"/fruits/{fruit_id}")

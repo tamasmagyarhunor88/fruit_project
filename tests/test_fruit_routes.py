@@ -39,3 +39,28 @@ def test_get_fruit(db_connection, page, test_web_address):
     
     calory_element = page.locator(".t-calory")
     expect(calory_element).to_have_text("Calories: 8")
+
+def test_create_fruit_form(db_connection, page, test_web_address):
+    db_connection.seed("seeds/fruit_store.sql")
+    page.goto(f"http://{test_web_address}/fruits")
+
+    # This time we click the link with the text 'Add a new book'
+    page.click("text=Add a new fruit")
+
+    # Then we fill out the field with the name attribute 'title'
+    page.fill("input[name='name']", "Strawberry")
+
+    # And the field with the name attribute 'author_name'
+    page.fill("input[name='calory']", "25")
+
+    # Finally we click the button with the text 'Create Book'
+    page.click("text=Create Fruit")
+
+    # Just as before, the virtual browser acts just like a normal browser and
+    # goes to the next page without us having to tell it to.
+
+    name_element = page.locator(".t-name")
+    expect(name_element).to_have_text("Name: Strawberry")
+
+    calory_element = page.locator(".t-calory")
+    expect(calory_element).to_have_text("Calories: 25")
