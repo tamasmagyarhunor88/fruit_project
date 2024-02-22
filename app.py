@@ -25,6 +25,8 @@ def get_emoji():
 # You can delete these lines if you don't need them.
 from example_routes import apply_example_routes
 apply_example_routes(app)
+from fruit_routes import apply_fruit_routes
+apply_fruit_routes(app)
 
 # == End Example Code ==
 
