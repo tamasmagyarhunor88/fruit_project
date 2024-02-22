@@ -13,3 +13,10 @@ def apply_fruit_routes(app):
         repository = FruitRepository(connection)
         fruits = repository.all()
         return render_template('fruits/index.html', fruits=fruits)
+    
+    @app.route('/fruits/<int:id>', methods=['GET'])
+    def get_fruit(id):
+        connection = get_flask_database_connection(app)
+        repository = FruitRepository(connection)
+        fruit = repository.find(id)
+        return render_template('fruits/show.html', fruit=fruit)
