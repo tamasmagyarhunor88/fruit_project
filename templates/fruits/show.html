@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Fruit Store</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>Single Fruit</h1>
+    <p class="t-name">Name: {{fruit.name}}</p>
+    <p class="t-calory">Calory: {{fruit.calory}}</p>
+
+    <!-- To have a delete button with a post request, we need a form -->
+    <!-- Note, we use `POST /books/<id>/delete because browsers can't send DELETE methods! -->
+    <form action="/fruits/{{fruit.id}}/delete" method="post">
+      <input type="submit" value="Delete Fruit">
+    </form>
+
+    <!-- This is a link to another page. -->
+    <!-- The browser will send `GET /books/new` when the user clicks this -->
+    <a href="/fruits">Back to all fruits</a>
+  </body>
+</html>
